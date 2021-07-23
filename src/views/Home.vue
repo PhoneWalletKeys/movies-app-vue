@@ -18,17 +18,21 @@ export default {
   data: function () {
     return {
       message: "Give this a watch.",
-      movie = [],
+      movies: [],
+      title: "Title",
+      year: 1991,
+      plot: "Plot",
     };
   },
   created: function () {
     this.indexMovies();
   },
   methods: {
+    indexMovies:function () {
     axios.get("http:localhost:3000/movies").then((response) => {
         this.movies = response.data;
         console.log("All Movies:", this.movies);
-    }),
+    })
   },
   createMovie: function () {
       console.log("added the movie");
@@ -46,5 +50,6 @@ export default {
         })
         .catch((error) => console.log(error.response));
     },
-  }
+  },
+};
 </script>
