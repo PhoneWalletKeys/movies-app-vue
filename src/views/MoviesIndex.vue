@@ -2,6 +2,10 @@
 <div class="movies-index">
     <div v-for="movie in movies" :key="movie.id">
     <div class="row" v-for="movie in movies" :key="movie.id">
+    Search by title:
+    <input v-model="titleFilter" />
+    <div v-for="movie in filterBy(movies, titleFilter, 'title')" :key="movie.id">
+
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body">
@@ -27,12 +31,16 @@
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
+
 export default {
   data: function () {
     return {
+      titleFilter: "",
       movies: [],
     };
   },
+  mixins: [Vue2Filters.mixin],
   created: function () {
     this.indexMovies();
   },
